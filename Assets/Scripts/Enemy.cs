@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
 
@@ -32,7 +31,16 @@ public class Enemy : MonoBehaviour
     IEnumerator StunRoutine(float duration)
     {
         isStunned = true;
+
+        
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.isKinematic = true;
+
         yield return new WaitForSeconds(duration);
+
+     
+        rb.isKinematic = false;
         isStunned = false;
     }
 }
