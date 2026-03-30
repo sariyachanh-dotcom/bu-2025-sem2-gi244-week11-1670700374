@@ -1,64 +1,57 @@
 using System.Collections;
 using UnityEngine;
 
+    [System.Serializable]
+public class Wave
+    {
+        public int totalSpawnEnemies;
+        public int numberOfRandomSpawnPoint;
+        public float delayStart;
+        public float spawnInterval;
+        public int numberOfPowerUp;
+    }
+
 public class SpawnManager : MonoBehaviour
-{
-    public Transform[] spawnPoints;
-    public GameObject enemyPrefab;
-
-    private Coroutine byeRoutine;
-
-    void Start()
     {
-        StartCoroutine(SpawnRoutine());
-    }
+        public Transform[] spawnPoints;
+        public GameObject enemyPrefab;
 
-    IEnumerator SpawnRoutine()
-    {
-        while (true)
+        public Wave[] waves;
+
+        void Start()
         {
-            RandomSpawn();
-            yield return new WaitForSeconds(3);
+            StartCoroutine(WaveRoutine());
         }
-    }
 
-    void RandomSpawn()
-    {
-        var index = Random.Range(0, spawnPoints.Length);
-        var spawnPoint = spawnPoints[index];
-        Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
-    }
-
-    private void Update()
-    {
-
-    }
-
-    IEnumerator Bye()
-    {
-        while (true)
+        IEnumerator WaveRoutine()
         {
-            Debug.Log("Bye " + Time.frameCount + " " + Time.time);
-            yield return new WaitForSeconds(1f);
-
-            yield return Hello(4);
-            yield return new WaitForSeconds(1f);
-
-            if (Time.time > 5)
+            for (int w = 0; w < waves.Length; w++)
             {
-                yield break;
+                Wave wave = waves[w];
+
+                //delay
+                yield return new WaitForSeconds(wave.delayStart);
+
+                //spawn enemy 
+                for (int i = 0; i < wave.totalSpawnEnemies; i++)
+                {
+                    RandomSpawnLimited(wave.numberOfRandomSpawnPoint);
+                    yield return new WaitForSeconds(wave.spawnInterval);
+                }
+
+                //waiting enemy
+                while (FindObjectsOfType<Enemy>().Length > 0)
+                {
+                    yield return null;
+                }
             }
         }
-    }
 
-    IEnumerator Hello(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        Debug.Log("Hello " + Time.frameCount);
-        yield return null;
-        Debug.Log("Hello " + Time.frameCount);
-        yield return null;
-        yield return null;
-        Debug.Log("Hello " + Time.frameCount);
+        void RandomSpawnLimited(int numberOfPoints)
+        {
+            int index = Random.Range(0, numberOfPoints);
+            var spawnPoint = spawnPoints[index];
+
+            Instantiate(enemyPrefab, spawnPoint.position + Vector3.up * 1f, Quaternion.identity);
     }
-}
+    }

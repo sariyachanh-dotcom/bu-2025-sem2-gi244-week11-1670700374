@@ -137,6 +137,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StunPowerUp
   stunDuration: 5
+--- !u!95 &127124155
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127124149}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4dac55eb6aa20f54294427ead4c2b930, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 1
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &137532562
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -984,6 +1006,27 @@ MonoBehaviour:
   - {fileID: 1176266729}
   - {fileID: 1651429377}
   enemyPrefab: {fileID: 8279026461862980053, guid: bb420f9ac2083cd4ea138531408225e7, type: 3}
+  waves:
+  - totalSpawnEnemies: 4
+    numberOfRandomSpawnPoint: 1
+    delayStart: 2
+    spawnInterval: 2
+    numberOfPowerUp: 0
+  - totalSpawnEnemies: 6
+    numberOfRandomSpawnPoint: 2
+    delayStart: 2
+    spawnInterval: 2
+    numberOfPowerUp: 1
+  - totalSpawnEnemies: 8
+    numberOfRandomSpawnPoint: 4
+    delayStart: 2
+    spawnInterval: 2
+    numberOfPowerUp: 1
+  - totalSpawnEnemies: 10
+    numberOfRandomSpawnPoint: 6
+    delayStart: 5
+    spawnInterval: 0.5
+    numberOfPowerUp: 2
 --- !u!4 &2000910670
 Transform:
   m_ObjectHideFlags: 0
@@ -1064,6 +1107,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3709808119504899638, guid: 8cd96a1609dc5a04f8f54162c32cab4a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 127124154}
+    - targetCorrespondingSourceObject: {fileID: 3709808119504899638, guid: 8cd96a1609dc5a04f8f54162c32cab4a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 127124155}
   m_SourcePrefab: {fileID: 100100000, guid: 8cd96a1609dc5a04f8f54162c32cab4a, type: 3}
 --- !u!1001 &7305732181041295649
 PrefabInstance:
