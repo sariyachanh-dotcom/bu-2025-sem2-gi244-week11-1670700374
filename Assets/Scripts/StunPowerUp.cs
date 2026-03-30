@@ -3,6 +3,7 @@ using UnityEngine;
 public class StunPowerUp : MonoBehaviour
 {
     public float stunDuration = 5f;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -13,6 +14,7 @@ public class StunPowerUp : MonoBehaviour
             {
                 e.Stun(stunDuration);
             }
+
             Destroy(gameObject);
         }
     }
