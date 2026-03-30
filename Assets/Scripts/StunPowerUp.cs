@@ -11,18 +11,19 @@ public class StunPowerUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //stun enemy 
-            Enemy[] enemies = FindObjectsOfType<Enemy>();
+            Enemy[] enemies = Object.FindObjectsByType<Enemy>(FindObjectsSortMode.None);
+
             foreach (Enemy e in enemies)
             {
-                e.Stun(stunDuration);
+                if (e != null)
+                    e.Stun(stunDuration);
             }
 
-           
-            powerIndicator.SetActive(false);
-            powerIndicator.SetActive(true);
+            if (powerIndicator != null)
+            {
+                powerIndicator.SetActive(true);
+            }
 
-           
             if (routine != null)
             {
                 StopCoroutine(routine);
@@ -30,14 +31,19 @@ public class StunPowerUp : MonoBehaviour
 
             routine = StartCoroutine(DisableAfter());
 
-            Destroy(gameObject);
+           
+            gameObject.SetActive(false);
         }
     }
+
 
     IEnumerator DisableAfter()
     {
         yield return new WaitForSeconds(stunDuration);
-
-        powerIndicator.SetActive(false);
+        
+        if (powerIndicator != null)
+        {
+            powerIndicator.SetActive(false);
+        }
     }
 }
